@@ -1,66 +1,76 @@
 # WMP-Remote-Control
-C# Windows Media Player Remote Control Library - using WMPLib , the C# way for development of remote control to media player with full features
 
-#Features
+C# Windows Media Player Remote Control Library - using WMPLib , the C# way for development of remote control to media player with full features.
 
-        void OpenMediaPlayer();
 
-        void CloseMediaPlayer();
+### Features
 
-        void Play();
+You can use this interface to completely control your windows media player
 
-        void Stop();
+```csharp
+    void OpenMediaPlayer();
 
-        void Pause();
+    void CloseMediaPlayer();
 
-        void NextTrack();
+    void Play();
 
-        void PrevTrack();
+    void Stop();
 
-        string GetCurrentSongName();
+    void Pause();
 
-        void JumpToTime(double secondTime);
+    void NextTrack();
 
-        SongDetails[] GetPlayList();
+    void PrevTrack();
 
-        void JumpToSongInPlayList(int nSongNumber);
+    string GetCurrentSongName();
 
-        void AddSongToPlayList(SongDetails song);
+    void JumpToTime(double secondTime);
 
-        void RemoveSongFromPlayList(SongDetails song);
+    SongDetails[] GetPlayList();
 
-        void VolumeUp(int nAmount);
+    void JumpToSongInPlayList(int nSongNumber);
 
-        void VolumeDown(int nAmount);
+    void AddSongToPlayList(SongDetails song);
 
-        void SetFixedVolume(int volume);
+    void RemoveSongFromPlayList(SongDetails song);
 
-        int GetCurrentVolume();
+    void VolumeUp(int nAmount);
 
-        bool IsMediaPlayerRunning();
+    void VolumeDown(int nAmount);
 
-        SongDetails GetCurrentSongDetails();
+    void SetFixedVolume(int volume);
 
-        double GetCurrentSongTime();
+    int GetCurrentVolume();
 
-        PlayingState GetPlayingState();
+    bool IsMediaPlayerRunning();
 
-        void ClearPlaylist();
+    SongDetails GetCurrentSongDetails();
 
-        bool GetShuffle();
+    double GetCurrentSongTime();
 
-        void SetShuffle(bool bIsShuffle);
+    PlayingState GetPlayingState();
 
-        bool GetRepeat();
+    void ClearPlaylist();
 
-        void SetRepeat(bool bIsRepeat);
+    bool GetShuffle();
 
-        void SetMute(bool bIsMute);
+    void SetShuffle(bool bIsShuffle);
 
-        bool GetMute();
+    bool GetRepeat();
 
-        void SetFullScreen(bool bIsFullScreen);
+    void SetRepeat(bool bIsRepeat);
 
-        bool GetFullScreen();
+    void SetMute(bool bIsMute);
 
-        MediaPlayerTypes GetInterfaceType();
+    bool GetMute();
+
+    void SetFullScreen(bool bIsFullScreen);
+
+    bool GetFullScreen();
+
+    MediaPlayerTypes GetInterfaceType();
+```
+
+
+
+
