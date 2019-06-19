@@ -1,9 +1,0 @@
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\bin\Release\RemoteWindowsMediaPlayer.dll.config
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\bin\Release\RemoteWindowsMediaPlayer.dll
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\bin\Release\RemoteWindowsMediaPlayer.pdb
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.csprojAssemblyReference.cache
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.Properties.Resources.resources
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.csproj.GenerateResource.cache
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.csproj.CoreCompileInputs.cache
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.dll
-C:\Users\vinit\Documents\Visual Studio 2017\Project\WMP-Remotes\RemoteWindowsMediaPlayer\RemoteWindowsMediaPlayer\obj\Release\RemoteWindowsMediaPlayer.pdb

@@ -1,5 +1,4 @@
-.vs\
-packages\
-RemoteWindowsMediaPlayer\bin\
-RemoteWindowsMediaPlayer\obj\
 .vs/
+packages/
+RemoteWindowsMediaPlayer/bin/
+RemoteWindowsMediaPlayer/obj/
