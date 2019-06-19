@@ -22,6 +22,8 @@ namespace MediaPlayerController
     [DllImport("user32.dll")]
     private static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
 
+
+
     public MediaPlayerTypes GetInterfaceType()
     {
       return MediaPlayerTypes.WindowsMediaPlayer;
@@ -30,10 +32,13 @@ namespace MediaPlayerController
     public WindowsMediaPlayerController()
     {
             WMPRemote.RemotedWindowsMediaPlayer rm = new WMPRemote.RemotedWindowsMediaPlayer();
-            rm.CreateControl();
-            this.mediaPlayerCore = (WMPCore)rm.GetOcx(); ;
+            rm.createComObject();
+            rm.connect();
+          
+            this.mediaPlayerCore = rm.getCore();
             this.HaveCoreClass();
     }
+
 
     private bool HaveCoreClass()
     {
@@ -67,10 +72,16 @@ namespace MediaPlayerController
        
         }
 
+
+        public WMPCore  getWMPCore()
+        {
+            return (WMPCore)this.mediaPlayerCore;
+        }
+
+
     public void Play()
     {
-      if (!this.HaveCoreClass())
-        return;
+     
       ((IWMPCore3) this.mediaPlayerCore).controls.play();
     }
 

@@ -2,19 +2,17 @@
 // CODE IS PROVIDED AS-IS WITH NO WARRIENTIES EXPRESSED OR IMPLIED.
 
 namespace WMPRemote 
-{using System;
-    using System.Windows.Forms;
+{
+    using System;
     using System.Runtime.InteropServices;
     using WMPLib;
 
 
     /// <summary>
     /// This is the actual Windows Media Control.
-    /// </summary>
-    [System.Windows.Forms.AxHost.ClsidAttribute("{6bf52a52-394a-11d3-b153-00c04f79faa6}")]
-    [ComVisible(true)]
+     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class RemotedWindowsMediaPlayer : System.Windows.Forms.AxHost,
+    public class RemotedWindowsMediaPlayer :
         IOleServiceProvider,
         IOleClientSite
     {
@@ -23,40 +21,36 @@ namespace WMPRemote
         /// Used to attach the appropriate interface to Windows Media Player.
         /// In here, we call SetClientSite on the WMP Control, passing it
         /// the dotNet container (this instance.)
-        /// </summary>
-        protected override void AttachInterfaces() 
+        [DllImport("ole32.dll", PreserveSig = false)]
+        [return: MarshalAs(UnmanagedType.Interface)]
+        public static extern object CoCreateInstance(
+          [In] ref Guid clsid,
+          [MarshalAs(UnmanagedType.Interface)] object punkOuter,
+          int context,
+          [In] ref Guid iid);
+        WMPRemote.IOleObject oleObject;
+        public void createComObject()
         {
+            Guid IID_IUnknown = new Guid("{00000000-0000-0000-C000-000000000046}");
 
-            try
-            {
-                //Get the IOleObject for Windows Media Player.
-                IOleObject oleObject = this.GetOcx() as IOleObject;
+            var gid = "{6bf52a52-394a-11d3-b153-00c04f79faa6}";
+            var clsid = new Guid(gid);
 
-                if (oleObject != null)
-                {
-                    //Set the Client Site for the WMP control.
-                    oleObject.SetClientSite(this as IOleClientSite);
-
-                    // Try and get the OCX as a WMP player
-                    if (this.GetOcx() as IWMPPlayer4 == null)
-                    {
-                        throw new Exception(string.Format("OCX is not an IWMPPlayer4! GetType returns '{0}'",
-                                                          this.GetOcx().GetType()));
-                    }
-                }
-                else
-                {
-                    throw new Exception("Failed to get WMP OCX as an IOleObject?!");
-                }
-
-                return;
-            }
-            catch (System.Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
+            object instance = CoCreateInstance(ref clsid, (object)null, 1, ref IID_IUnknown);
+            oleObject = instance as WMPRemote.IOleObject;
         }
 
+
+        public void connect()
+        {
+            oleObject.SetClientSite(this);
+           
+        }
+
+        public WMPCore getCore()
+        {
+            return oleObject as WMPCore;
+        }
 
         #region IOleServiceProvider Memebers - Working
         /// <summary>
@@ -140,8 +134,8 @@ namespace WMPRemote
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        public RemotedWindowsMediaPlayer() : 
-            base("6bf52a52-394a-11d3-b153-00c04f79faa6") 
+        public RemotedWindowsMediaPlayer()//: 
+           // base("6bf52a52-394a-11d3-b153-00c04f79faa6") 
         {
         }        
     }   
