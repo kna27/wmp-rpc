@@ -55,7 +55,7 @@ namespace MediaPlayerController
 
     public bool IsWMPRunning()
     {
-      return   Process.GetProcessesByName("wmplayer.exe").Length > 0;
+      return   Process.GetProcessesByName("wmplayer").Length > 0;
     }
 
     public void OpenMediaPlayer()
