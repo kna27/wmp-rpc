@@ -11,7 +11,7 @@ namespace RemoteWindowsMediaPlayer
         static string songName;
         static string songPath;
         static string artistName;
-        static string albumName;
+        // static string albumName;
         static string duration;
         static string songLength;
 
@@ -27,7 +27,7 @@ namespace RemoteWindowsMediaPlayer
                     songPath = x.SongPath;
                     artistName = x.SongName.Substring(0,
                         x.SongName.LastIndexOf(" - " + wmpc.GetCurrentSongName().ToString()));
-                    albumName = "[Album name]";
+                    // albumName = "[Album name]";
 
                     if (wmpc.GetPlayingState() == PlayingState.Paused)
                     {
@@ -42,8 +42,11 @@ namespace RemoteWindowsMediaPlayer
                         songLength = $"{lengthTs.Minutes:D2}:{lengthTs.Seconds:D2}";
                     }
 
-                    Console.WriteLine("Windows Media Player\n{0}\n{1} | {2}\n{3}  {4}\n\n",
-                        songName, albumName, artistName, duration, songLength);
+                    Console.WriteLine("Windows Media Player\n{0}\n{1}\n{2}  {3}\n\n",
+                        songName, artistName, duration, songLength);
+
+                    // Console.WriteLine("Windows Media Player\n{0}\n{1} | {2}\n{3}  {4}\n\n",
+                    //   songName, albumName, artistName, duration, songLength);
                 }
                 else
                 {
