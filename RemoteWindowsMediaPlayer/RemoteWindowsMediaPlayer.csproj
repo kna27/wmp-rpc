@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\DiscordPresence.cs">
+      <Link>DiscordPresence.cs</Link>
+    </Compile>
     <Compile Include="IMediaPlayerRemoteControl.cs" />
     <Compile Include="Utils\MediaPlayerTypes.cs" />
     <Compile Include="Utils\PlayingState.cs" />
