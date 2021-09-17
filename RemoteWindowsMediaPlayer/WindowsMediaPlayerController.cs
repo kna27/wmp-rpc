@@ -64,45 +64,9 @@ namespace MediaPlayerController
 
         }
 
-
         public WMPCore GetWMPCore()
         {
             return (WMPCore)this.mediaPlayerCore;
-        }
-
-
-        public void Play()
-        {
-
-            ((IWMPCore3)this.mediaPlayerCore).controls.play();
-        }
-
-        public void Stop()
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.stop();
-        }
-
-        public void Pause()
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.pause();
-        }
-
-        public void NextTrack()
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.next();
-        }
-
-        public void PrevTrack()
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.previous();
         }
 
         public string GetCurrentSongName()
@@ -110,13 +74,6 @@ namespace MediaPlayerController
             if (this.HaveCoreClass())
                 return ((IWMPCore3)this.mediaPlayerCore).currentMedia.name;
             return string.Empty;
-        }
-
-        public void JumpToTime(double secondTime)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.currentPosition = secondTime;
         }
 
         public SongDetails[] GetPlayList()
@@ -133,48 +90,6 @@ namespace MediaPlayerController
                     SongNumber = lIndex
                 };
             return songDetailsArray;
-        }
-
-        public void JumpToSongInPlayList(int nSongNumber)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).controls.currentItem = ((IWMPCore3)this.mediaPlayerCore).currentPlaylist.get_Item(nSongNumber);
-        }
-
-        public void AddSongToPlayList(SongDetails song)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).currentPlaylist.appendItem(this.mediaPlayerCore.newMedia(song.SongPath));
-        }
-
-        public void RemoveSongFromPlayList(SongDetails song)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).currentPlaylist.removeItem(((IWMPCore3)this.mediaPlayerCore).currentPlaylist.get_Item(song.SongNumber));
-        }
-
-        public void VolumeUp(int nAmount)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.volume += nAmount;
-        }
-
-        public void VolumeDown(int nAmount)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.volume -= nAmount;
-        }
-
-        public void SetFixedVolume(int volume)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.volume = volume;
         }
 
         public int GetCurrentVolume()
@@ -268,26 +183,12 @@ namespace MediaPlayerController
             return playingState;
         }
 
-        public void ClearPlaylist()
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).currentPlaylist.clear();
-        }
-
         public bool GetShuffle()
         {
             bool flag = false;
             if (this.HaveCoreClass())
                 flag = ((IWMPCore3)this.mediaPlayerCore).settings.getMode("shuffle");
             return flag;
-        }
-
-        public void SetShuffle(bool bIsShuffle)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.setMode("shuffle", bIsShuffle);
         }
 
         public bool GetRepeat()
@@ -298,45 +199,11 @@ namespace MediaPlayerController
             return flag;
         }
 
-        public void SetRepeat(bool bIsRepeat)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.setMode("loop", bIsRepeat);
-        }
-
-        public void SetMute(bool bIsMute)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            ((IWMPCore3)this.mediaPlayerCore).settings.mute = bIsMute;
-        }
-
         public bool GetMute()
         {
             if (this.HaveCoreClass())
                 return ((IWMPCore3)this.mediaPlayerCore).settings.mute;
             return true;
-        }
-
-        public void SetFullScreen(bool bIsFullScreen)
-        {
-            if (!this.HaveCoreClass())
-                return;
-            this.SetFocusOnMediaPlayer();
-            //FullScreen();
-
-        }
-
-        private void SetFocusOnMediaPlayer()
-        {
-            foreach (Process process in Process.GetProcessesByName("wmplayer"))
-                WindowsMediaPlayerController.ShowWindow(process.MainWindowHandle, 0);
-        }
-
-        public bool GetFullScreen()
-        {
-            return false;
         }
 
         public string GetSupportedFiles()
