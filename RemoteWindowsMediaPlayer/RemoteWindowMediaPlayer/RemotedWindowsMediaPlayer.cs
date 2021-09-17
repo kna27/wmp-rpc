@@ -1,7 +1,7 @@
 // Written by Jonathan Dibble, Microsoft Corporation
 // CODE IS PROVIDED AS-IS WITH NO WARRIENTIES EXPRESSED OR IMPLIED.
 
-namespace WMPRemote 
+namespace WMPRemote
 {
     using System;
     using System.Runtime.InteropServices;
@@ -10,11 +10,11 @@ namespace WMPRemote
 
     /// <summary>
     /// This is the actual Windows Media Control.
-     [ComVisible(true)]
+    [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class RemotedWindowsMediaPlayer :
-        IOleServiceProvider,
-        IOleClientSite
+       IOleServiceProvider,
+       IOleClientSite
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace WMPRemote
           int context,
           [In] ref Guid iid);
         WMPRemote.IOleObject oleObject;
-        public void createComObject()
+        public void CreateComObject()
         {
             Guid IID_IUnknown = new Guid("{00000000-0000-0000-C000-000000000046}");
 
@@ -41,13 +41,13 @@ namespace WMPRemote
         }
 
 
-        public void connect()
+        public void Connect()
         {
             oleObject.SetClientSite(this);
-           
+
         }
 
-        public WMPCore getCore()
+        public WMPCore GetCore()
         {
             return oleObject as WMPCore;
         }
@@ -66,11 +66,11 @@ namespace WMPRemote
             if (riid == new Guid("cbb92747-741f-44fe-ab5b-f1a48f3b2a59"))
             {
                 IWMPRemoteMediaServices iwmp = new RemoteHostInfo();
-               
+
                 return Marshal.GetComInterfaceForObject(iwmp, typeof(IWMPRemoteMediaServices));
             }
 
-            throw new System.Runtime.InteropServices.COMException("No Interface", (int) HResults.E_NOINTERFACE);
+            throw new System.Runtime.InteropServices.COMException("No Interface", (int)HResults.E_NOINTERFACE);
         }
         #endregion
 
@@ -79,9 +79,9 @@ namespace WMPRemote
         /// Not in use.  See MSDN for details.
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.COMException">E_NOTIMPL</exception>
-        void IOleClientSite.SaveObject() 
+        void IOleClientSite.SaveObject()
         {
-            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int) HResults.E_NOTIMPL);
+            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int)HResults.E_NOTIMPL);
         }
 
         /// <summary>
@@ -90,14 +90,14 @@ namespace WMPRemote
         /// <exception cref="System.Runtime.InteropServices.COMException"></exception>
         object IOleClientSite.GetMoniker(uint dwAssign, uint dwWhichMoniker)
         {
-            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int) HResults.E_NOTIMPL);
+            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int)HResults.E_NOTIMPL);
         }
 
         /// <summary>
         /// Not in use.  See MSDN for details.
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.COMException"></exception>
-        object IOleClientSite.GetContainer() 
+        object IOleClientSite.GetContainer()
         {
             return (int)HResults.E_NOINTERFACE;
         }
@@ -106,27 +106,27 @@ namespace WMPRemote
         /// Not in use.  See MSDN for details.
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.COMException"></exception>
-        void IOleClientSite.ShowObject()        
+        void IOleClientSite.ShowObject()
         {
-            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int) HResults.E_NOTIMPL);
+            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int)HResults.E_NOTIMPL);
         }
 
         /// <summary>
         /// Not in use.  See MSDN for details.
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.COMException"></exception>
-        void IOleClientSite.OnShowWindow(bool fShow)        
+        void IOleClientSite.OnShowWindow(bool fShow)
         {
-            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int) HResults.E_NOTIMPL);
+            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int)HResults.E_NOTIMPL);
         }
 
         /// <summary>
         /// Not in use.  See MSDN for details.
         /// </summary>
         /// <exception cref="System.Runtime.InteropServices.COMException"></exception>
-        void IOleClientSite.RequestNewObjectLayout()        
+        void IOleClientSite.RequestNewObjectLayout()
         {
-            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int) HResults.E_NOTIMPL);
+            throw new System.Runtime.InteropServices.COMException("Not Implemented", (int)HResults.E_NOTIMPL);
         }
 
         #endregion          
@@ -135,9 +135,9 @@ namespace WMPRemote
         /// Default Constructor.
         /// </summary>
         public RemotedWindowsMediaPlayer()//: 
-           // base("6bf52a52-394a-11d3-b153-00c04f79faa6") 
+                                          // base("6bf52a52-394a-11d3-b153-00c04f79faa6") 
         {
-        }        
-    }   
-	}   
+        }
+    }
+}
 

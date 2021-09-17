@@ -1,10 +1,9 @@
 // Written by Jonathan Dibble, Microsoft Corporation
 // CODE IS PROVIDED AS-IS WITH NO WARRIENTIES EXPRESSED OR IMPLIED.
-using System;
 
 namespace WMPRemote
 {
-	using System.Runtime.InteropServices;
+    using System.Runtime.InteropServices;
 
 
     /// <summary>
@@ -12,7 +11,7 @@ namespace WMPRemote
     /// </summary>
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    public class RemoteHostInfo : 
+    public class RemoteHostInfo :
         IWMPRemoteMediaServices
     {
         #region IWMPRemoteMediaServices Members
@@ -21,7 +20,7 @@ namespace WMPRemote
         /// </summary>
         /// <returns></returns>
         public string GetServiceType()
-        {   
+        {
             return "Remote";
         }
 

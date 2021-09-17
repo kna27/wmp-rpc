@@ -150,7 +150,7 @@ namespace WMPRemote
     GuidAttribute("6d5140c1-7436-11ce-8034-00aa006009fa"),
     InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown),
     ComVisible(true)]
-    public interface BadIOleServiceProvider
+    public interface IBadIOleServiceProvider
     {
         /// <summary>
         /// This is incorrect because it causes our return interface to be boxed
@@ -248,8 +248,8 @@ namespace WMPRemote
         /// See MSDN for more information.
         /// </summary>
         void SetHostNames(
-            [MarshalAs(UnmanagedType.LPWStr)]string szContainerApp,
-            [MarshalAs(UnmanagedType.LPWStr)]string szContainerObj);
+            [MarshalAs(UnmanagedType.LPWStr)] string szContainerApp,
+            [MarshalAs(UnmanagedType.LPWStr)] string szContainerObj);
 
         /// <summary>
         /// Implemented by Windows Media Player ActiveX control.
@@ -287,7 +287,7 @@ namespace WMPRemote
         /// Implemented by Windows Media Player ActiveX control.
         /// See MSDN for more information.
         /// </summary>
-        void DoVerb(uint iVerb, uint lpmsg, [MarshalAs(UnmanagedType.Interface)]object pActiveSite,
+        void DoVerb(uint iVerb, uint lpmsg, [MarshalAs(UnmanagedType.Interface)] object pActiveSite,
             uint lindex, uint hwndParent, uint lprcPosRect);
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace WMPRemote
         /// Implemented by Windows Media Player ActiveX control.
         /// See MSDN for more information.
         /// </summary>
-        uint Advise([MarshalAs(UnmanagedType.Interface)]object pAdvSink);
+        uint Advise([MarshalAs(UnmanagedType.Interface)] object pAdvSink);
 
         /// <summary>
         /// Implemented by Windows Media Player ActiveX control.
