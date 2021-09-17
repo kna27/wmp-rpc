@@ -1,0 +1,3 @@
+[submodule "WMP-Remote-Control"]
+	path = WMP-Remote-Control
+	url = ./WMP-Remote-Control
