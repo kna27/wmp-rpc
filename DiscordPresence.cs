@@ -1,56 +1,71 @@
+using DiscordRPC;
 using MediaPlayerController;
 using System;
+using System.IO;
 using System.Threading;
 
 namespace RemoteWindowsMediaPlayer
 {
     class DiscordPresence
     {
+        public static DiscordRpcClient client;
+
         static TimeSpan durationTs;
         static TimeSpan lengthTs;
         static string songName;
-        static string songPath;
         static string artistName;
-        // static string albumName;
         static string duration;
         static string songLength;
 
         static public void Main(String[] args)
         {
+            // this is temporary dont bash me over it :p
+            var appId = File.ReadAllLines(@"../../../../appId.txt")[0].Replace('\n', '\0');
+            Console.WriteLine(appId);
+            client = new DiscordRpcClient(appId);
+            client.OnReady += (sender, e) =>
+            {
+                Console.WriteLine("Received Ready from user {0}", e.User.Username);
+            };
+
+            client.Initialize();
             while (true)
             {
                 WindowsMediaPlayerController wmpc = new WindowsMediaPlayerController();
                 SongDetails x = wmpc.GetCurrentSongDetails();
-                if (wmpc.GetPlayingState() == PlayingState.Playing || wmpc.GetPlayingState() == PlayingState.Paused)
+                if (wmpc.GetPlayingState() == PlayingState.Playing)
                 {
                     songName = wmpc.GetCurrentSongName();
-                    songPath = x.SongPath;
                     artistName = x.SongName.Substring(0,
                         x.SongName.LastIndexOf(" - " + wmpc.GetCurrentSongName().ToString()));
-                    // albumName = "[Album name]";
+                    durationTs = TimeSpan.FromSeconds(wmpc.GetCurrentSongTime());
+                    duration = $"{durationTs.Minutes:D2}:{durationTs.Seconds:D2}";
+                    lengthTs = TimeSpan.FromSeconds(x.Duration);
+                    songLength = $"{lengthTs.Minutes:D2}:{lengthTs.Seconds:D2}";
 
-                    if (wmpc.GetPlayingState() == PlayingState.Paused)
+
+                    client.SetPresence(new RichPresence()
                     {
-                        duration = "Paused";
-                        songLength = "";
-                    }
-                    else
-                    {
-                        durationTs = TimeSpan.FromSeconds(wmpc.GetCurrentSongTime());
-                        duration = $"{durationTs.Minutes:D2}:{durationTs.Seconds:D2}";
-                        lengthTs = TimeSpan.FromSeconds(x.Duration);
-                        songLength = $"{lengthTs.Minutes:D2}:{lengthTs.Seconds:D2}";
-                    }
-
-                    Console.WriteLine("Windows Media Player\n{0}\n{1}\n{2}  {3}\n\n",
-                        songName, artistName, duration, songLength);
-
-                    // Console.WriteLine("Windows Media Player\n{0}\n{1} | {2}\n{3}  {4}\n\n",
-                    //   songName, albumName, artistName, duration, songLength);
+                        Details = songName + " | " + artistName,
+                        State = duration + "----" + songLength,
+                        Assets = new Assets()
+                        {
+                            LargeImageKey = "wmp_logo",
+                            LargeImageText = $"Listening to {songName} on Windows Media Player"
+                        }
+                    });
                 }
                 else
                 {
-                    Console.WriteLine("Windows Media Player\nIdle\n\n");
+                    client.SetPresence(new RichPresence()
+                    {
+                        Details = "Idle",
+                        Assets = new Assets()
+                        {
+                            LargeImageKey = "wmp_logo",
+                            LargeImageText = "Windows Media Player"
+                        }
+                    });
                 }
                 Thread.Sleep(1000);
             }
