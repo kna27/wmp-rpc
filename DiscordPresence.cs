@@ -16,8 +16,9 @@ namespace RemoteWindowsMediaPlayer
         static string artistName;
         static string duration;
         static string songLength;
-        static char filled = '◼';
-        static char empty = '▭';
+        readonly static char filled = '◼';
+        readonly static char empty = '▭';
+
         static public void Main(String[] args)
         {
             // this is temporary dont bash me over it :p
@@ -36,8 +37,16 @@ namespace RemoteWindowsMediaPlayer
                 if (wmpc.GetPlayingState() == PlayingState.Playing)
                 {
                     songName = wmpc.GetCurrentSongName();
-                    artistName = x.SongName.Substring(0,
+                    if (x.SongName.LastIndexOf(" - " + wmpc.GetCurrentSongName().ToString()) == -1)
+                    {
+                        artistName = "";
+                    }
+                    else
+                    {
+                        artistName = x.SongName.Substring(0,
                         x.SongName.LastIndexOf(" - " + wmpc.GetCurrentSongName().ToString()));
+                    }
+
                     durationTs = TimeSpan.FromSeconds(wmpc.GetCurrentSongTime());
                     duration = $"{durationTs.Minutes:D2}:{durationTs.Seconds:D2}";
                     lengthTs = TimeSpan.FromSeconds(x.Duration);
@@ -57,7 +66,7 @@ namespace RemoteWindowsMediaPlayer
 
                     client.SetPresence(new RichPresence()
                     {
-                        Details = songName + " | " + artistName,
+                        Details = songName + (artistName != "" ? " | " + artistName : ""),
                         State = duration + " " + progressBar + " " + songLength,
                         Assets = new Assets()
                         {
