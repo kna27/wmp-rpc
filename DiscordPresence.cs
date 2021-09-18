@@ -1,4 +1,4 @@
-using DiscordRPC;
+﻿using DiscordRPC;
 using MediaPlayerController;
 using System;
 using System.IO;
@@ -16,12 +16,12 @@ namespace RemoteWindowsMediaPlayer
         static string artistName;
         static string duration;
         static string songLength;
-
+        static char filled = '◼';
+        static char empty = '▭';
         static public void Main(String[] args)
         {
             // this is temporary dont bash me over it :p
             var appId = File.ReadAllLines(@"../../../../appId.txt")[0].Replace('\n', '\0');
-            Console.WriteLine(appId);
             client = new DiscordRpcClient(appId);
             client.OnReady += (sender, e) =>
             {
@@ -42,16 +42,27 @@ namespace RemoteWindowsMediaPlayer
                     duration = $"{durationTs.Minutes:D2}:{durationTs.Seconds:D2}";
                     lengthTs = TimeSpan.FromSeconds(x.Duration);
                     songLength = $"{lengthTs.Minutes:D2}:{lengthTs.Seconds:D2}";
+                    double percentage = (durationTs.TotalSeconds / lengthTs.TotalSeconds) * 100;
+                    int rounded = (int)(Math.Round(percentage / 10.0) * 10);
 
+                    string progressBar = "";
+                    for (int i = 0; i < rounded / 10; i++)
+                    {
+                        progressBar += filled;
+                    }
+                    for (int i = 0; i < 10 - rounded / 10; i++)
+                    {
+                        progressBar += empty;
+                    }
 
                     client.SetPresence(new RichPresence()
                     {
                         Details = songName + " | " + artistName,
-                        State = duration + "----" + songLength,
+                        State = duration + " " + progressBar + " " + songLength,
                         Assets = new Assets()
                         {
                             LargeImageKey = "wmp_logo",
-                            LargeImageText = $"Listening to {songName} on Windows Media Player"
+                            LargeImageText = $"Listening to \"{songName}\" on Windows Media Player"
                         }
                     });
                 }
