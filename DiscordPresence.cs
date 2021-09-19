@@ -1,7 +1,6 @@
 ﻿using DiscordRPC;
 using MediaPlayerController;
 using System;
-using System.IO;
 using System.Threading;
 
 namespace RemoteWindowsMediaPlayer
@@ -28,7 +27,7 @@ namespace RemoteWindowsMediaPlayer
         static public void Main(String[] args)
         {
             // Get Discord app ID
-            var appId = Properties.Resources.appId.Replace('\n', '\0');
+            string appId = Properties.Resources.appId.Replace('\n', '\0');
 
             // Start a new Discord RPC client
             client = new DiscordRpcClient(appId);
