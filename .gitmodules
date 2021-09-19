@@ -1,4 +1,0 @@
-[submodule "WMP-Remote-Control"]
-	path = WMP-Remote-Control
-	url = https://github.com/kna27/WMP-Remote-Control.git
-    branch = wmp-rpc
