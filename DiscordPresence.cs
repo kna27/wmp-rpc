@@ -27,8 +27,8 @@ namespace RemoteWindowsMediaPlayer
 
         static public void Main(String[] args)
         {
-            // this is temporary dont bash me over it :p
-            var appId = File.ReadAllLines(@"../../../../appId.txt")[0].Replace('\n', '\0');
+            // Get Discord app ID
+            var appId = Properties.Resources.appId.Replace('\n', '\0');
 
             // Start a new Discord RPC client
             client = new DiscordRpcClient(appId);
