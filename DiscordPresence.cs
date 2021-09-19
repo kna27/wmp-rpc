@@ -16,13 +16,21 @@ namespace RemoteWindowsMediaPlayer
         static string artistName;
         static string duration;
         static string songLength;
+        /// <summary>
+        /// The character for a filled-in section of the progress bar
+        /// </summary>
         readonly static char filled = '◼';
+        /// <summary>
+        /// The character for an empty section of the progress bar
+        /// </summary>
         readonly static char empty = '▭';
 
         static public void Main(String[] args)
         {
             // this is temporary dont bash me over it :p
             var appId = File.ReadAllLines(@"../../../../appId.txt")[0].Replace('\n', '\0');
+
+            // Start a new Discord RPC client
             client = new DiscordRpcClient(appId);
             client.OnReady += (sender, e) =>
             {
@@ -30,12 +38,18 @@ namespace RemoteWindowsMediaPlayer
             };
 
             client.Initialize();
+
+            // Run forever
             while (true)
             {
+                // Get new data from Windows Media Player
                 WindowsMediaPlayerController wmpc = new WindowsMediaPlayerController();
                 SongDetails x = wmpc.GetCurrentSongDetails();
+
+                // If currently playing
                 if (wmpc.GetPlayingState() == PlayingState.Playing)
                 {
+                    // Format song and artist information
                     songName = wmpc.GetCurrentSongName();
                     if (x.SongName.LastIndexOf(" - " + wmpc.GetCurrentSongName().ToString()) == -1)
                     {
@@ -51,9 +65,12 @@ namespace RemoteWindowsMediaPlayer
                     duration = $"{durationTs.Minutes:D2}:{durationTs.Seconds:D2}";
                     lengthTs = TimeSpan.FromSeconds(x.Duration);
                     songLength = $"{lengthTs.Minutes:D2}:{lengthTs.Seconds:D2}";
+
+                    // Get % of how much of the song has been played and round to nearest 10%
                     double percentage = (durationTs.TotalSeconds / lengthTs.TotalSeconds) * 100;
                     int rounded = (int)(Math.Round(percentage / 10.0) * 10);
 
+                    // Add a filled char for every 10% and an empty char for the remaining percent
                     string progressBar = "";
                     for (int i = 0; i < rounded / 10; i++)
                     {
@@ -64,6 +81,7 @@ namespace RemoteWindowsMediaPlayer
                         progressBar += empty;
                     }
 
+                    // Update RPC with new information
                     client.SetPresence(new RichPresence()
                     {
                         Details = songName + (artistName != "" ? " | " + artistName : ""),
@@ -75,6 +93,7 @@ namespace RemoteWindowsMediaPlayer
                         }
                     });
                 }
+                // If not currently listening to a song
                 else
                 {
                     client.SetPresence(new RichPresence()
@@ -87,6 +106,7 @@ namespace RemoteWindowsMediaPlayer
                         }
                     });
                 }
+                // Wait one second
                 Thread.Sleep(1000);
             }
         }
