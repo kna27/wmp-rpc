@@ -1,0 +1,5 @@
+.vs/
+packages/
+RemoteWindowsMediaPlayer/bin/
+RemoteWindowsMediaPlayer/obj/
+RemoteWindowsMediaPlayer/Resources/*.txt
