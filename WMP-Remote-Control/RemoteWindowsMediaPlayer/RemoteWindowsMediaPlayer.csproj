@@ -5,9 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FAC315B3-9685-40D2-A7EF-08BB7004E768}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>RemoteWindowsMediaPlayer</RootNamespace>
-    <AssemblyName>RemoteWindowsMediaPlayer</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WindowsMediaPlayerDiscordPresence</RootNamespace>
+    <AssemblyName>WMP Discord Presence</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -80,6 +80,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
