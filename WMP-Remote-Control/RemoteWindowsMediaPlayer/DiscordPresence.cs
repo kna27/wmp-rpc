@@ -1,9 +1,10 @@
 ﻿using DiscordRPC;
 using MediaPlayerController;
 using System;
+using System.Diagnostics;
 using System.Threading;
 
-namespace RemoteWindowsMediaPlayer
+namespace WindowsMediaPlayerDiscordPresence
 {
     class DiscordPresence
     {
@@ -26,6 +27,11 @@ namespace RemoteWindowsMediaPlayer
 
         static public void Main(String[] args)
         {
+            if (Process.GetProcessesByName("WMP Discord Presence").Length > 1)
+            {
+                Environment.Exit(1);
+            }
+
             // Get Discord app ID
             string appId = Properties.Resources.appId.Replace('\n', '\0');
 
