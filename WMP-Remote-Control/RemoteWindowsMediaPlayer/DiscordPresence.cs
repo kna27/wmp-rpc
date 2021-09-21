@@ -44,11 +44,13 @@ namespace WindowsMediaPlayerDiscordPresence
 
             client.Initialize();
 
+            // Create new controller object
+            WindowsMediaPlayerController wmpc = new WindowsMediaPlayerController();
+
             // Run forever
             while (true)
             {
                 // Get new data from Windows Media Player
-                WindowsMediaPlayerController wmpc = new WindowsMediaPlayerController();
                 SongDetails x = wmpc.GetCurrentSongDetails();
 
                 // If currently playing
